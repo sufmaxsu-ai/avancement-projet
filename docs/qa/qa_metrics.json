@@ -1,0 +1,31 @@
+{
+  "film_title": "Le Gâteau de Mamie",
+  "duration_seconds": 45.0,
+  "total_frames": 1080,
+  "fps": 24,
+  "drawing_cadence_fps": 12,
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "video_codec": "h264",
+  "pixel_format": "yuv420p",
+  "audio_codec": "aac",
+  "audio_sample_rate": 48000,
+  "file_size_bytes": 32250367,
+  "safe_zone": {
+    "top": 250,
+    "bottom": 450,
+    "left": 64,
+    "right": 130,
+    "xMin": 64,
+    "xMax": 950,
+    "yMin": 250,
+    "yMax": 1470
+  },
+  "metrics": {
+    "mean_frame_diff": 3.3336,
+    "scene9_under_table_feet_motion": 10.986,
+    "min_brightness": 179.0,
+    "max_brightness": 217.16
+  },
+  "status": "PASS"
+}

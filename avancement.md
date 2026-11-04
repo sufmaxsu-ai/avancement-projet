@@ -1,58 +1,75 @@
 # Suivi d'Avancement du Projet — « Le Gâteau de Mamie »
 
-**Dernière mise à jour :** 2026-11-04 18:22 UTC  
-**Objectif :** Créer un court-métrage d'animation 2D dessiné image par image en JavaScript/TypeScript sur Canvas 2D (`1080×1920`, format vertical 9:16, `24 fps`, durée retenue : **45,0 secondes** soit **1080 frames**), rendu image par image via Chromium headless (Playwright) et assemblé avec FFmpeg (`libx264`, `yuv420p`, `-movflags +faststart`), accompagné d'une prévisualisation live interactive dans l'`index.html` racine.
+**Dernière mise à jour :** 2026-11-04 19:05 UTC  
+**Objectif :** Créer un court-métrage d'animation 2D dessiné image par image en JavaScript/TypeScript sur Canvas 2D (`1080×1920`, format vertical 9:16, `24 fps`, durée retenue : **45,0 secondes** soit **1080 frames**), rendu individuellement image par image via Chromium headless (Playwright) et assemblé avec FFmpeg (`libx264`, `yuv420p`, `-movflags +faststart`, audio AAC 48 kHz), accompagné d'une prévisualisation live interactive dans l'`index.html` racine.
 
 ---
 
 ## 1. État Actuel du Projet
 
-- **Statut global :** En cours de réalisation — Étapes 1, 2 et 3 terminées ; développement du moteur d'animation 2D et des 10 scènes en cours.
-- **Durée retenue :** **45,0 secondes** (`1080 frames` à `24 fps`, base 12 dessins/s sur la feuille d'exposition avec actions rapides à 24 fps).
+- **Statut global :** **TERMINÉ ET VALIDÉ (100 %)** — Toutes les scènes, le lecteur live, le pipeline d'export Chromium + FFmpeg, le fichier MP4 final, les planches de contrôle qualité et les livrables documentaires sont produits, testés et poussés sur le dépôt distant.
+- **Durée retenue :** **45,0 secondes** (`1080 frames` à `24 fps`, base 12 dessins/s sur la feuille d'exposition).
 
-### Liste des tâches
+### Liste des tâches (Bilan Final)
 
-- [x] **Étape 0 — Continuité & Dépôt de suivi** : Vérification du dépôt distant `git@github.com:sufmaxsu-ai/avancement-projet.git`, initialisation Git locale.
-- [x] **Étape 1 — Environnement & Outils** : Vérification et installation de Node.js (`v20.20.2`), npm (`10.8.2`), Vite (`7.3.2`), TypeScript (`5.9.3`), Chromium (`156.0.8078.79`), Playwright (`1.64.1`), FFmpeg (`5.1.9`), FFprobe (`5.1.9`), Python (`3.11.2`), Pillow (`9.4.0`), NumPy (`1.24.2`), OpenCV (`4.6.0`).
-- [x] **Étape 2 — Étude des 11 dépôts GitHub** : Clonage dans `references/upstream/`, analyse des licences, commits et techniques, rédaction de `SKILLS_USAGE_NOTES.md`.
-- [ ] **Étape 3 — Bible Graphique & Feuille d'Exposition** : Création de `docs/GRAPHIC_BIBLE.md`, `docs/EXPOSURE_SHEET.md` et `src/animation/characterBible.ts`.
-- [ ] **Étape 4 — Moteur de dessin 2D traditionnel (`src/animation/`)** :
-  - `config.ts` (constantes 9:16, zone de sécurité `x: 64..950, y: 250..1470`, palette aquarelle/crayon)
-  - `pencilEngine.ts` (`mulberry32`, grain papier, traits graphite à pression variable, hachures croisées, lavis doux, maintien du trait à 12 dessins/s)
-  - `characters.ts` (Mamie Colette, Léo, Clara avec cinématique inverse 2-segments, mains articulées, expressions faciales, course et balancement des pieds sous la table)
-  - `environment.ts` & `props.ts` (cuisine familiale, jardin ensoleillé, saladier, œufs, fouet, pâte évolutive, moule, four, gâteau doré, décoration progressive, couteau, parts découpées et servies)
-  - `scenes.ts` & `renderer.ts` (les 10 scènes obligatoires + contrat déterministe `window.drawFrame(frame)` / `window.seek(t)`)
-  - `soundtrack.ts` (synthèse audio douce Web Audio API + générateur WAV 48 kHz hors-ligne)
-- [ ] **Étape 5 — Application de prévisualisation live (`index.html`, `src/App.tsx`)** : Lecteur Canvas 9:16 temps réel, lecture/pause/reprise/redémarrage, barre de progression, affichage zone de sécurité 9:16, pelure d'oignon (onion skinning), explorateur des 10 scènes et de la bible graphique, lecteur et téléchargement MP4.
-- [ ] **Étape 6 — Pipeline d'export Chromium + FFmpeg (`scripts/export-video.sh`, `scripts/render-frames.mjs`, `scripts/generate-audio.mjs`)** : Capture individuelle des 1080 frames et encodage H.264 `final/animation.mp4` + copie dans `public/animation.mp4`.
-- [ ] **Étape 7 — Contrôle Qualité (`scripts/qa-check.py`, `QA_REPORT.md`, `ANIMATION_ENVIRONMENT_GUIDE.md`)** : Vérification OpenCV/Pillow/FFprobe, planches contact, vérification de la zone de sécurité 9:16, validation `npm run build`.
-
----
-
-## 2. Outils, Versions et Commandes d'Installation
-
-| Outil | Version | Commande de vérification / d'installation |
-|---|---|---|
-| Node.js | `v20.20.2` | `node -v` |
-| npm | `10.8.2` | `npm -v` |
-| Vite | `7.3.2` | `npx vite --version` |
-| TypeScript | `5.9.3` | `npx tsc -v` |
-| Chromium | `156.0.8078.79` | `sudo apt-get install -y chromium` |
-| Playwright | `1.64.1` | `npm install -D playwright` |
-| FFmpeg / FFprobe | `5.1.9-0+deb12u1` | `sudo apt-get install -y ffmpeg` |
-| Python 3 | `3.11.2` | `python3 --version` |
-| Pillow / NumPy / OpenCV | `9.4.0` / `1.24.2` / `4.6.0` | `sudo apt-get install -y python3-pil python3-numpy python3-opencv` |
+- [x] **Étape 0 — Continuité & Dépôt de suivi** : Liaison avec `git@github.com:sufmaxsu-ai/avancement-projet.git` et suivi continu.
+- [x] **Étape 1 — Environnement & Outils** : Installation et vérification de Node.js (`v20.20.2`), npm (`10.8.2`), Vite (`7.3.2`), TypeScript (`5.9.3`), Chromium (`156.0.8078.79`), Playwright (`1.64.1`), FFmpeg (`5.1.9`), FFprobe (`5.1.9`), Python (`3.11.2`), Pillow (`9.4.0`), NumPy (`1.24.2`), OpenCV (`4.6.0`).
+- [x] **Étape 2 — Étude des 11 dépôts GitHub** : Clonage dans `references/upstream/`, relevé des commits SHA et licences (`references/upstream/REPOS_MANIFEST.txt`), rédaction de `SKILLS_USAGE_NOTES.md`.
+- [x] **Étape 3 — Bible Graphique & Feuille d'Exposition** : Création de `docs/GRAPHIC_BIBLE.md`, `docs/EXPOSURE_SHEET.md` et `src/animation/characterBible.ts`.
+- [x] **Étape 4 — Moteur de dessin 2D traditionnel (`src/animation/`)** :
+  - `src/animation/config.ts` (format 9:16 `1080×1920`, `24 fps`, `45.0s`, `SAFE_ZONE` `x ∈ [64, 950], y ∈ [250, 1470]`, `PALETTE`, `SCENES`)
+  - `src/animation/pencilEngine.ts` (générateur déterministe `mulberry32`, grain papier aquarelle, traits de crayon graphite à double passage, hachures croisées, maintien du grain sur 2 frames = 12 dessins/s)
+  - `src/animation/characters.ts` (Mamie Colette, Clara 5 ans, Léo 7 ans : cinématique inverse 2-segments, mains articulées, expressions faciales, course avec contact au sol, et **jambes trop courtes qui pendent et balancent joyeusement sous les chaises en Scènes 9 et 10**)
+  - `src/animation/environment.ts` & `src/animation/props.ts` (cuisine familiale en bois, four articulé, jardin d'été, saladier, œufs cassés, fouet, pâte évolutive, moule, gâteau doré immuable avec décoration progressive au sucre glace et 7 fraises, couteau, assiettes et parts découpées)
+  - `src/animation/scenes.ts` & `src/animation/renderer.ts` (les 10 scènes obligatoires + contrat déterministe `window.drawFrame(frame)` / `window.seek(t)`)
+  - `src/animation/soundtrack.ts` (synthèse musicale et bruitages doux Web Audio API)
+- [x] **Étape 5 — Application de prévisualisation live (`index.html`, `src/App.tsx`, `src/main.tsx`)** : Lecteur Canvas 9:16 temps réel (`requestAnimationFrame`), lecture/pause/reprise/redémarrage, barre de progression, superposition zone de sécurité 9:16, pelure d'oignon (*onion skinning*), feuille d'exposition interactive, bible graphique, lecteur et téléchargement MP4.
+- [x] **Étape 6 — Pipeline d'export Chromium + FFmpeg (`scripts/export-video.sh`, `scripts/render-frames.mjs`, `scripts/generate-audio.mjs`)** : Rendu individuel des 1080 frames dans Chromium headless, synthèse WAV 48 kHz, assemblage FFmpeg H.264 `yuv420p` `-movflags +faststart` dans `final/animation.mp4` et `public/animation.mp4`, et validation FFprobe.
+- [x] **Étape 7 — Contrôle Qualité & Livrables (`scripts/qa-check.py`, `scripts/verify-preview.mjs`, `QA_REPORT.md`, `ANIMATION_ENVIRONMENT_GUIDE.md`)** : Vérification OpenCV/Pillow/NumPy/FFprobe, planches contact (`docs/qa/`), poses clés (`docs/keyframes/`), et validation `npm run build` + `npm run preview`.
 
 ---
 
-## 3. Décisions Techniques et Artistiques
+## 2. Fichiers et Dossiers Créés / Modifiés
 
-1. **Durée de 45,0 secondes (1080 frames à 24 fps)** : Permet de raconter les 10 scènes obligatoires sans précipitation, en laissant respirer la préparation de la pâte (6,0s), les jeux au jardin (5,0s), le balancement des petits pieds sous les chaises (Scène 9 : 4,5s) et le découpage/service des parts de gâteau (Scène 10 : 5,0s).
-2. **Esthétique livre d'histoires illustré au crayon et aquarelle** : Utilisation d'un générateur pseudo-aléatoire déterministe (`mulberry32`) indexé sur le numéro de dessin (`Math.floor(frame / 2)` pour une cadence de 12 dessins/s sur une vidéo à 24 fps). Le trait vit subtilement comme un vrai dessin animé sur papier grainé sans scintiller numériquement.
-3. **Zone de sécurité 9:16 stricte (`1080×1920`)** : Toutes les actions clés, les visages, les mains, le gâteau, le texte de la scène 7 (« À table, les enfants ! Le gâteau est prêt ! ») et les pieds des enfants qui se balancent sous la table sont composés à l'intérieur du rectangle sûr `x ∈ [64, 950]`, `y ∈ [250, 1470]`.
+| Chemin | Rôle |
+|---|---|
+| `index.html` | Point d'entrée unique à la racine (prévisualisation live + livraison) |
+| `avancement.md` | Document de suivi continu du projet |
+| `README.md` | Guide rapide d'installation, lancement, export et arborescence |
+| `ANIMATION_ENVIRONMENT_GUIDE.md` | Documentation complète des outils, versions et commandes de reproduction |
+| `SKILLS_USAGE_NOTES.md` | Analyse comparative des 11 dépôts GitHub étudiés, adaptés et intégrés |
+| `QA_REPORT.md` | Rapport détaillé du contrôle qualité (FFprobe, OpenCV, zone sûre 9:16, corrections) |
+| `docs/GRAPHIC_BIBLE.md` | Bible graphique des personnages, couleurs, accessoires et décors |
+| `docs/EXPOSURE_SHEET.md` | Feuille d'exposition image par image des 10 scènes (1080 frames) |
+| `docs/keyframes/*.jpg` | 24 poses clés et intermédiaires extraites des 10 scènes |
+| `docs/qa/*` | Planche contact 20 poses, planche zone sûre 9:16, strip & onion-skin des pieds sous la table, capture live browser, `qa_metrics.json` |
+| `src/animation/*.ts` | Moteur complet d'animation 2D dessiné image par image sur Canvas 2D |
+| `src/App.tsx`, `src/main.tsx` | Interface du studio de prévisualisation live et exposition de `window.drawFrame` |
+| `scripts/export-video.sh` | Script d'export reproductible Chromium → FFmpeg → FFprobe |
+| `scripts/render-frames.mjs` | Script Playwright/Chromium de capture individuelle des 1080 frames |
+| `scripts/generate-audio.mjs` | Générateur de la bande-son synchronisée WAV 48 kHz (45,0s) |
+| `scripts/qa-check.py` | Script Python (OpenCV, Pillow, NumPy, FFprobe) de contrôle qualité |
+| `scripts/verify-preview.mjs` | Script Playwright de test automatisé de l'interface live et du téléchargement MP4 |
+| `final/animation.mp4` & `public/animation.mp4` | Court-métrage final encodé en H.264 `1080×1920`, `24 fps`, `yuv420p`, `45.0s` |
+
+---
+
+## 3. Résultats des Tests Effectués
+
+1. **Test du pipeline d'export complet (`./scripts/export-video.sh index.html final/animation.mp4`)** :
+   - `1080 / 1080` frames rendues individuellement par Chromium headless (`1080×1920`).
+   - Encodage FFmpeg réussi : `codec=h264 (High)`, `1080x1920 (9:16)`, `pix_fmt=yuv420p`, `fps=24`, `durée=45.00s`, `audio=aac 48000 Hz stereo`, `taille=31 494,5 Ko`.
+2. **Contrôle Qualité Python (`python3 scripts/qa-check.py`)** :
+   - Statut : `PASS`.
+   - Mouvement inter-dessins moyen : `3.334`.
+   - Mouvement mesuré dans la région sous la table en Scènes 9–10 (balancement des pieds) : `10.986`.
+   - Respect de la zone de sécurité 9:16 (`x ∈ [64, 950], y ∈ [250, 1470]`) vérifié visuellement sur `docs/qa/safe_zone_9x16_verification.jpg`.
+3. **Test de build et prévisualisation live (`npm run build` + `node scripts/verify-preview.mjs`)** :
+   - Compilation Vite + TypeScript réussie (`dist/index.html` + `dist/animation.mp4`).
+   - Vérification Playwright sur `vite preview` : Canvas `1080×1920` actif, `window.drawFrame` et `window.seek` opérationnels, téléchargement `./animation.mp4` en `HTTP 200 OK`.
 
 ---
 
 ## 4. Prochaine Action Précise
 
-Créer `README.md`, `docs/GRAPHIC_BIBLE.md` et les modules du moteur d'animation dans `src/animation/`, puis pousser l'étape sur `origin/main`.
+Le projet est intégralement terminé. Pour relancer la prévisualisation live à tout moment : `npm run dev -- --host` (ou `npm run preview -- --host`), et pour relancer l'export vidéo complet : `./scripts/export-video.sh index.html final/animation.mp4`.

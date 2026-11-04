@@ -2,6 +2,7 @@ node_modules/
 .DS_Store
 *.log
 frames_raw_tmp/
+final/soundtrack.wav
 references/upstream/*/
 !references/upstream/REPOS_MANIFEST.txt
 .env
