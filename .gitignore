@@ -1,0 +1,11 @@
+node_modules/
+.DS_Store
+*.log
+frames_raw_tmp/
+references/upstream/*/
+!references/upstream/REPOS_MANIFEST.txt
+.env
+.env.*
+*.pem
+*.key
+id_ed25519*
