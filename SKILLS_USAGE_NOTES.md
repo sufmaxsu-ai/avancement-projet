@@ -80,7 +80,7 @@ Ce document synthétise l'étude approfondie des **11 dépôts GitHub** clonés 
     * `pencil(pts, opts)` : trait de crayon graphite en 3 passes fines décalées avec interruptions naturelles là où la pression simulée par bruit cohérent (`noise1`) est faible.
     * `stroke(pts, opts)` : trait d'encre organique interpolé par spline de Catmull-Rom avec épaisseur variable selon une courbe de pression et effilement aux extrémités (`taper`).
 * **Techniques retenues** :
-  * Combinaison de ces trois primitives (`wash` aquarelle livre jeunesse + `pencil` crayon de couleur/graphite + `stroke` contour organique sépia/fusain doux) dans notre moteur `web/js/animation-engine.js`.
+  * Combinaison de ces trois primitives (`wash` aquarelle livre jeunesse + `pencil` crayon de couleur/graphite + `stroke` contour organique sépia/fusain doux) dans notre moteur `src/animation/engine.ts` (et `src/animation/pen.ts`).
 
 ### Dépôt 8 : `JohnHeibel/ClaudeAnimationBase`
 * **Méthodes étudiées** :
@@ -107,13 +107,13 @@ Ce document synthétise l'étude approfondie des **11 dépôts GitHub** clonés 
 * **Méthodes étudiées** :
   * Bonnes pratiques d'interface web : accessibilité (`aria-label`, contrastes, navigation clavier Espace / Flèches gauche-droite), mise en page responsive, contrôles de lecture intuitifs, indicateurs de temps et d'état sans dépendance externe.
 * **Techniques retenues** :
-  * Conception de `web/preview.html`, `web/index.html` et de l'interface studio interactive accessible dans le navigateur.
+  * Conception de l'unique point d'entrée `index.html` à la racine du projet Vite + TypeScript (`src/App.tsx`), combinant la prévisualisation interactive temps réel sur Canvas 2D et la page de livraison du film.
 
 ---
 
 ## 3. Décision Architecturale Unifiée
 
-Plutôt que d'empiler plusieurs moteurs incompatibles, nous avons conçu **un moteur unique, autonome et zéro-dépendance externe** (`web/js/animation-engine.js`) qui alimente simultanément :
-1. **La prévisualisation en direct dans le navigateur** (`web/preview.html`, `web/index.html` et l'application web principale) via `requestAnimationFrame`.
-2. **Le pipeline de rendu image par image** (`scripts/render-frames.mjs` et `scripts/export-video.sh`) via Chromium headless (Playwright) appelant `window.drawFrame(frameIndex)` pour chaque image `0 .. 143` (144 frames = 6,00 secondes à 24 fps constants en 1080×1920 vertical).
+Plutôt que d'empiler plusieurs moteurs incompatibles, nous avons conçu **un moteur unique, autonome et déterministe** (`src/animation/engine.ts`, `src/animation/pen.ts`, `src/animation/poses.ts`, `src/animation/exposureSheet.ts`) qui alimente simultanément :
+1. **La prévisualisation en direct dans le navigateur** via l'unique `index.html` à la racine du projet (`src/App.tsx`) utilisant `requestAnimationFrame` et exposant globalement `window.drawFrame(frameIndex)`, `window.seek(t)` et `window.__anim`.
+2. **Le pipeline de rendu image par image** (`scripts/render-frames.mjs` et `scripts/export-video.sh`) via Chromium headless (Playwright) ouvrant l'`index.html` racine (servi par Vite) et appelant `window.drawFrame(frameIndex)` pour chaque image `0 .. 143` (144 frames = 6,00 secondes à 24 fps constants en 1080×1920 vertical).
 3. **L'assemblage FFmpeg** avec piste sonore stéréo 48 kHz générée localement (`scripts/generate-audio.mjs`) et le contrôle qualité automatisé sous Python (`scripts/qc_check.py` avec OpenCV, Pillow, NumPy et `ffprobe`).
