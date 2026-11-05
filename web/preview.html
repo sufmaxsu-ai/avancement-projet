@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Le Gâteau de Mamie — Prévisualisation Directe Canvas 2D & Livraison Autonome (9:16)</title>
+    <style>
+      :root {
+        --bg-dark: #1f1915;
+        --panel-bg: #2a221c;
+        --border-col: #46372c;
+        --accent: #c96348;
+        --accent-gold: #f2c478;
+        --text-main: #f7efe2;
+        --text-muted: #cbb89d;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg-dark);
+        color: var(--text-main);
+        font-family: Georgia, 'Times New Roman', serif;
+      }
+      /* Mode Chromium Headless pur (1080x1920 sans marges ni UI) */
+      body.headless-mode {
+        overflow: hidden;
+        background: #f6efe2;
+      }
+      body.headless-mode header,
+      body.headless-mode .controls-panel,
+      body.headless-mode .right-column,
+      body.headless-mode .canvas-badge {
+        display: none !important;
+      }
+      body.headless-mode main,
+      body.headless-mode .left-column,
+      body.headless-mode .canvas-shell {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: none !important;
+        width: 1080px !important;
+        height: 1920px !important;
+        border: none !important;
+        border-radius: 0 !important;
+      }
+      header {
+        background: #27201b;
+        border-bottom: 1px solid var(--border-col);
+        padding: 14px 24px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 1.35rem;
+      }
+      header p {
+        margin: 4px 0 0;
+        font-family: system-ui, sans-serif;
+        font-size: 0.82rem;
+        color: var(--text-muted);
+      }
+      .download-btn {
+        background: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        padding: 9px 16px;
+        border-radius: 8px;
+        font-family: system-ui, sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+      main {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 24px;
+        align-items: start;
+      }
+      .panel {
+        background: var(--panel-bg);
+        border: 1px solid var(--border-col);
+        border-radius: 16px;
+        padding: 18px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+      }
+      .canvas-badge {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: system-ui, sans-serif;
+        font-size: 0.78rem;
+        margin-bottom: 10px;
+        color: var(--accent-gold);
+      }
+      .canvas-shell {
+        width: 100%;
+        max-width: 360px;
+        aspect-ratio: 9 / 16;
+        margin: 0 auto;
+        border: 2px solid #5c4838;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #f6efe2;
+      }
+      #animation-canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .controls-panel {
+        margin-top: 14px;
+        font-family: system-ui, sans-serif;
+      }
+      .time-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-bottom: 6px;
+      }
+      #timeline-scrubber {
+        width: 100%;
+        accent-color: var(--accent);
+        cursor: pointer;
+      }
+      .btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+        justify-content: center;
+      }
+      button {
+        background: #382e26;
+        color: var(--text-main);
+        border: 1px solid #524134;
+        padding: 7px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: system-ui, sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+      button:hover {
+        background: #4b3d33;
+      }
+      .toggles-row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1px solid #3c2f26;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+      }
+      .right-column {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .kf-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 10px;
+      }
+      .kf-btn {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+      }
+      .video-box {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        align-items: flex-start;
+      }
+      video {
+        width: 220px;
+        aspect-ratio: 9 / 16;
+        border-radius: 10px;
+        border: 1px solid #5a4637;
+        background: #000;
+      }
+      .specs-list {
+        font-family: system-ui, sans-serif;
+        font-size: 0.83rem;
+        line-height: 1.6;
+        color: #e4d4bc;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Le Gâteau de Mamie — Prévisualisation Directe HTML5 Canvas 2D (9:16)</h1>
+        <p>
+          Animation dessinée image par image par JavaScript (1080 × 1920 • 24 fps • 7,50 s / 180 frames) — Fonctionne directement sans MP4
+        </p>
+      </div>
+      <a class="download-btn" href="./animation.mp4" download="le-gateau-de-mamie-9x16.mp4">
+        ⬇ Télécharger animation.mp4
+      </a>
+    </header>
+
+    <main>
+      <section class="panel left-column">
+        <div class="canvas-badge">
+          <span>● Rendu JavaScript Temps Réel (Canvas 2D)</span>
+          <span id="frame-display">Frame 001 / 180</span>
+        </div>
+
+        <div class="canvas-shell">
+          <canvas id="animation-canvas" width="1080" height="1920"></canvas>
+        </div>
+
+        <div class="controls-panel">
+          <div class="time-row">
+            <span id="time-display">0.00 s / 7.50 s</span>
+            <strong id="phase-title" style="color: var(--accent-gold)">1. Mamie fouette la pâte</strong>
+          </div>
+          <input
+            id="timeline-scrubber"
+            type="range"
+            min="0"
+            max="179"
+            value="0"
+            aria-label="Barre de progression de l'animation"
+          />
+
+          <div class="btn-row">
+            <button id="btn-play" type="button">▶ Lecture</button>
+            <button id="btn-pause" type="button">⏸ Pause</button>
+            <button id="btn-resume" type="button">⏯ Reprise</button>
+            <button id="btn-restart" type="button">↺ Redémarrer</button>
+            <button id="btn-prev-frame" type="button">-1 frame</button>
+            <button id="btn-next-frame" type="button">+1 frame</button>
+          </div>
+
+          <div class="toggles-row">
+            <label>
+              <input id="chk-onion" type="checkbox" /> Onion Skin (image précédente)
+            </label>
+            <label>
+              <input id="chk-safe" type="checkbox" /> Zone de sécurité 9:16
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="right-column">
+        <div class="panel">
+          <h2 style="margin: 0 0 6px; font-size: 1.1rem">Feuille d’Exposition & Poses Clés</h2>
+          <p id="phase-summary" style="margin: 0; font-family: system-ui, sans-serif; font-size: 0.85rem; color: var(--text-muted)">
+            Cliquez sur une pose clé ci-dessous pour inspecter chaque étape de l’histoire image par image.
+          </p>
+          <div id="keyframes-list" class="kf-grid"></div>
+        </div>
+
+        <div class="panel">
+          <h2 style="margin: 0 0 12px; font-size: 1.1rem">Vidéo MP4 Exportée & Caractéristiques du Film</h2>
+          <div class="video-box">
+            <video controls loop playsinline preload="metadata" src="./animation.mp4"></video>
+            <div class="specs-list">
+              <div><strong>Format :</strong> Vertical 9:16 (1080 × 1920)</div>
+              <div><strong>Cadence :</strong> 24 fps constants (180 frames)</div>
+              <div><strong>Durée :</strong> 7,50 secondes</div>
+              <div><strong>Codec vidéo :</strong> H.264 (libx264, yuv420p, +faststart)</div>
+              <div><strong>Audio :</strong> AAC stéréo 48 kHz (bruitages discrets synchronisés)</div>
+              <div><strong>Style :</strong> Silhouettes anatomiques unifiées sans traits internes, line boil au crayon feuille par feuille, coloriage humain imparfait</div>
+              <div style="margin-top: 10px">
+                <a class="download-btn" href="./animation.mp4" download="le-gateau-de-mamie-9x16.mp4">
+                  ⬇ Télécharger le fichier MP4
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./engine-bundle.js"></script>
+  </body>
+</html>

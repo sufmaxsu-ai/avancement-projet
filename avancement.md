@@ -19,19 +19,20 @@
 - [x] **Étape 1 :** Cloner et étudier les 11 dépôts dans `references/upstream/`, relever commits et licences (`references/upstream/REPOS_MANIFEST.txt`), rédiger `SKILLS_USAGE_NOTES.md`.
 - [x] **Étape 2 :** Installer et tester FFmpeg (`5.1.9`), ffprobe (`5.1.9`), Playwright + Chromium headless (`156.0.8078.4`), Python 3 (`3.11.2`) + Pillow (`9.4.0`) + NumPy (`2.4.6`) + OpenCV headless (`5.0.0`). Rédiger `ANIMATION_ENVIRONMENT_GUIDE.md`.
 - [x] **Étape 3 :** Rédiger la bible graphique (`docs/GRAPHIC_BIBLE.md`), le storyboard et la feuille d'exposition (`docs/EXPOSURE_SHEET.md`) pour les 180 frames (7,5 s à 24 fps).
-- [ ] **Étape 4 :** Développer le moteur de dessin organique unifié (`src/animation/`) :
+- [x] **Étape 4 :** Développer le moteur de dessin organique unifié (`src/animation/`) :
   - Moteur de crayonné `pencilEngine.ts` (contours continus sans traits internes, remplissage décalé « fait main », hachures, grain papier, projection 3D perspective).
-  - Anatomie continue et cinématique inverse `characters.ts` (Mamie Colette, Léo, Clara : bras/jambes unifiés, crâne masqué sous les cheveux, articulations anatomiques, balancement des pieds, doigt gourmand dans le gâteau).
-  - Décors 3D et accessoires permanents `environment.ts` et `props.ts` (cuisine en perspective, porte de four 3D articulée, jardin visible par la baie vitrée, saladier, fouet, moule, gâteau 3D, assiettes, parts).
+  - Anatomie continue et cinématique inverse `characters.ts` (Mamie Colette, Léo, Clara : bras/jambes unifiés `drawUnifiedLimb`, crâne masqué sous les cheveux, articulations anatomiques, balancement des pieds sous les chaises, doigt gourmand dans le gâteau).
+  - Décors 3D et accessoires permanents `environment.ts` et `props.ts` (cuisine en perspective, porte de four 3D articulée, jardin visible par la baie vitrée, saladier, fouet, moule, gâteau 3D avec encoche de découpe, assiettes, parts).
   - Orchestration et timeline déterministe `scenes.ts` et `renderer.ts` (`drawFrame(frameIndex)`).
-- [ ] **Étape 5 :** Construire la prévisualisation interactive temps réel (`web/preview.html` et application React studio `src/App.tsx`).
+- [x] **Étape 5 :** Construire la prévisualisation interactive temps réel (`web/preview.html` et application React studio `src/App.tsx`).
 - [ ] **Étape 6 :** Créer le script d'export autonome `scripts/export-video.sh` (support HTML/JS via Chromium, séquence PNG/JPEG, vidéo existante ; formats MP4, WebM, MOV) et le générateur audio synchronisé `scripts/generate-audio.mjs`.
 - [ ] **Étape 7 :** Rendre les 180 frames en 1080×1920, inspecter **chaque image et séquence clé** (vérification anatomique, absence de traits parasites, contact mains-objets, continuité), exécuter le contrôle qualité Python/OpenCV (`scripts/qa-check.py`), produire `QA_REPORT.md`.
 - [ ] **Étape 8 :** Assembler et valider `final/animation.mp4`, copier dans `web/animation.mp4` et `public/animation.mp4`, tester l'autonomie du dossier `web/` et rédiger `SKILL.md` final.
 
 ## 3. Historique des Commits et Push Réussis
 - `1b23956` (`2026-11-05`) : Initialisation du projet d'animation 2D 'Le Gâteau de Mamie' (7.5s, 24fps) et suivi `avancement.md` (push confirmé sur `origin/main`).
-- Second commit en cours (`docs: étapes 1 à 3 complétées - étude des 11 dépôts, guide environnement, bible graphique et feuille d'exposition`).
+- `dfc7888` (`2026-11-05`) : Étapes 1 à 3 complétées - étude des 11 dépôts, guide environnement, bible graphique et feuille d'exposition (push confirmé sur `origin/main`).
+- Troisième commit en cours (`feat: étapes 4 et 5 - moteur d'animation 2D sans traits parasites, scène 3D et prévisualisation web/preview.html`).
 
 ## 4. Prochaine Action Précise
-Développer le moteur d'animation dessiné image par image dans `src/animation/` (`config.ts`, `pencilEngine.ts`, `environment.ts`, `props.ts`, `characters.ts`, `scenes.ts`, `renderer.ts`).
+Créer les scripts d'export et de rendu (`scripts/generate-audio.mjs`, `scripts/render-frames.mjs`, `scripts/export-video.sh`, `scripts/qa-check.py`), rendre les 180 frames, inspecter visuellement les images et produire le MP4 final.
