@@ -1,0 +1,11 @@
+tools | https://github.com/alesha-pro/tools.git | commit: 90e966201add3ff41dc4ebd1348165c0cb2d5eab | license_file: LICENSE
+hand-drawn-film | https://github.com/anzal1/hand-drawn-film.git | commit: c4e600c97c76c61123201285caa89fb260a992d6 | license_file: LICENSE
+procedural-film | https://github.com/kuhnhomeuk-cell/procedural-film.git | commit: f59413999ae24f6e1f9165b73a0eaa97a0b1c407 | license_file: LICENSE
+code-animations | https://github.com/beriki770-ship-it/code-animations.git | commit: 46accf66e59975633250aa115cb30e8ccb3d7d8c | license_file: LICENSE
+javascript-animation-skills | https://github.com/iart-ai/javascript-animation-skills.git | commit: f7d0882a313249cbd43f0e4e9e209b1622870253 | license_file: LICENSE
+drawn-by-code | https://github.com/illodev/drawn-by-code.git | commit: 993968aba9dfb183ea04ecea256db85e0077fd09 | license_file: LICENSE
+claude-animation-skill | https://github.com/buildwithhanif/claude-animation-skill.git | commit: 4ddb8c80fdec96dc9f55d4b9bdee60bde6f0134b | license_file: LICENSE
+ClaudeAnimationBase | https://github.com/JohnHeibel/ClaudeAnimationBase.git | commit: 0ac8bf2b31942376cb6b8c4074715595d512acd2 | license_file: LICENSE
+example-draw-javascript | https://github.com/hoangkien1703/example-draw-javascript.git | commit: a31a4aaa8c20c9341f63e90ee18b38cbf6c37c98 | license_file: 
+skills | https://github.com/anthropics/skills.git | commit: ca45fc496a3436251f191354091d557da31c15b5 | license_file: 
+agent-skills | https://github.com/vercel-labs/agent-skills.git | commit: 1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62 | license_file: 

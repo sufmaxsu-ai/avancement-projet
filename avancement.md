@@ -16,9 +16,9 @@
 ## 2. Liste des Tâches
 - [x] Connexion au dépôt distant `git@github.com:sufmaxsu-ai/avancement-projet.git` et vérification de l'historique.
 - [x] Création initiale de `avancement.md` et `README.md`.
-- [ ] **Étape 1 :** Cloner et étudier les 11 dépôts dans `references/upstream/`, relever commits et licences, rédiger `SKILLS_USAGE_NOTES.md`.
-- [ ] **Étape 2 :** Installer et tester FFmpeg, ffprobe, Playwright + Chromium headless, Python 3 + Pillow + NumPy + OpenCV headless. Rédiger `ANIMATION_ENVIRONMENT_GUIDE.md`.
-- [ ] **Étape 3 :** Rédiger la bible graphique (`docs/GRAPHIC_BIBLE.md`), le storyboard et la feuille d'exposition (`docs/EXPOSURE_SHEET.md`) pour les 180 frames (7,5 s à 24 fps).
+- [x] **Étape 1 :** Cloner et étudier les 11 dépôts dans `references/upstream/`, relever commits et licences (`references/upstream/REPOS_MANIFEST.txt`), rédiger `SKILLS_USAGE_NOTES.md`.
+- [x] **Étape 2 :** Installer et tester FFmpeg (`5.1.9`), ffprobe (`5.1.9`), Playwright + Chromium headless (`156.0.8078.4`), Python 3 (`3.11.2`) + Pillow (`9.4.0`) + NumPy (`2.4.6`) + OpenCV headless (`5.0.0`). Rédiger `ANIMATION_ENVIRONMENT_GUIDE.md`.
+- [x] **Étape 3 :** Rédiger la bible graphique (`docs/GRAPHIC_BIBLE.md`), le storyboard et la feuille d'exposition (`docs/EXPOSURE_SHEET.md`) pour les 180 frames (7,5 s à 24 fps).
 - [ ] **Étape 4 :** Développer le moteur de dessin organique unifié (`src/animation/`) :
   - Moteur de crayonné `pencilEngine.ts` (contours continus sans traits internes, remplissage décalé « fait main », hachures, grain papier, projection 3D perspective).
   - Anatomie continue et cinématique inverse `characters.ts` (Mamie Colette, Léo, Clara : bras/jambes unifiés, crâne masqué sous les cheveux, articulations anatomiques, balancement des pieds, doigt gourmand dans le gâteau).
@@ -30,7 +30,8 @@
 - [ ] **Étape 8 :** Assembler et valider `final/animation.mp4`, copier dans `web/animation.mp4` et `public/animation.mp4`, tester l'autonomie du dossier `web/` et rédiger `SKILL.md` final.
 
 ## 3. Historique des Commits et Push Réussis
-- Initialisation en cours (sera mis à jour immédiatement après le premier push).
+- `1b23956` (`2026-11-05`) : Initialisation du projet d'animation 2D 'Le Gâteau de Mamie' (7.5s, 24fps) et suivi `avancement.md` (push confirmé sur `origin/main`).
+- Second commit en cours (`docs: étapes 1 à 3 complétées - étude des 11 dépôts, guide environnement, bible graphique et feuille d'exposition`).
 
 ## 4. Prochaine Action Précise
-Cloner les 11 dépôts GitHub dans `references/upstream/` et installer les outils système/Python/Node requis (FFmpeg, Playwright Chromium, Pillow, NumPy, OpenCV).
+Développer le moteur d'animation dessiné image par image dans `src/animation/` (`config.ts`, `pencilEngine.ts`, `environment.ts`, `props.ts`, `characters.ts`, `scenes.ts`, `renderer.ts`).
